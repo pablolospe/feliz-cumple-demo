@@ -7,10 +7,14 @@ import { isAuthenticated, isSectionUnlocked } from "@/lib/auth";
 import PhotoGallery from "@/components/PhotoGallery";
 import { SAMPLE_PHOTOS } from "@/lib/data";
 import { ArrowLeft, Camera } from "lucide-react";
+import { useDemoSettings } from "@/lib/demo-settings";
+import NextSectionCta from "@/components/NextSectionCta";
 
 export default function FotosPage() {
   const router = useRouter();
+  const { themeConfig } = useDemoSettings();
   const [authorized, setAuthorized] = useState(false);
+  const themedCopy = themeConfig.sectionCopy.fotos;
 
   useEffect(() => {
     if (!isAuthenticated()) {
@@ -30,6 +34,9 @@ export default function FotosPage() {
     );
   }
 
+  const pageTitle = themedCopy?.title || "Galería de Recuerdos";
+  const pageSubtitle = themedCopy?.subtitle || "Selección de fotos hermosas y momentos compartidos";
+
   return (
     <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 py-8 sm:py-12 flex-1 flex flex-col">
       <div className="mb-8">
@@ -45,13 +52,21 @@ export default function FotosPage() {
             <Camera className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-4xl font-serif text-text">Galería de Recuerdos</h1>
-            <p className="text-sm text-muted">seleccion random de fotos hermosas</p>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-gold bg-gold/10 px-2 py-0.5 rounded-full border border-gold/25">
+                {themedCopy?.badgeText || "Paso 3 de 4"}
+              </span>
+            </div>
+            <h1 className="text-2xl sm:text-4xl font-serif text-text mt-1">{pageTitle}</h1>
+            <p className="text-sm text-muted">{pageSubtitle}</p>
           </div>
         </div>
       </div>
 
       <PhotoGallery photos={SAMPLE_PHOTOS} />
+
+      {/* Siguiente parada conectada */}
+      <NextSectionCta currentSectionId="fotos" />
     </div>
   );
 }

@@ -332,7 +332,7 @@ export default function PhotoGallery({ photos }: PhotoGalleryProps) {
             <div className="overflow-y-auto flex-1 pr-1 my-2 max-h-[50vh] flex flex-wrap gap-2 content-start">
               {searchedTags.length === 0 ? (
                 <div className="w-full py-8 text-center text-sm text-muted">
-                  No se encontraron etiquetas con "{tagSearch}"
+                  No se encontraron etiquetas con &quot;{tagSearch}&quot;
                 </div>
               ) : (
                 searchedTags.map((t) => {

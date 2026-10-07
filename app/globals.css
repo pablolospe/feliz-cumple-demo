@@ -1,46 +1,108 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0d0a14;
-  --color-surface: #1a1527;
-  --color-surface2: #241d36;
-  --color-gold: #c9a84c;
-  --color-gold-light: #e8c97a;
-  --color-rose: #e8a0b0;
-  --color-text: #f0ead6;
-  --color-muted: #8878a0;
+  --color-bg: var(--app-bg, #0d0a14);
+  --color-surface: var(--app-surface, #1a1527);
+  --color-surface2: var(--app-surface2, #241d36);
+  --color-gold: var(--app-accent, #c9a84c);
+  --color-gold-light: var(--app-accent-light, #e8c97a);
+  --color-rose: var(--app-secondary, #e8a0b0);
+  --color-text: var(--app-text, #f0ead6);
+  --color-muted: var(--app-muted, #8878a0);
 
   --font-display: var(--font-playfair), serif;
   --font-body: var(--font-inter), sans-serif;
 }
 
 :root {
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  /* Default: Golden Glam (Standard) */
+  --app-bg: #0d0a14;
+  --app-surface: #1a1527;
+  --app-surface2: #241d36;
+  --app-accent: #c9a84c;
+  --app-accent-light: #e8c97a;
+  --app-secondary: #e8a0b0;
+  --app-text: #f0ead6;
+  --app-muted: #9d8db5;
+  --app-glass-bg: rgba(26, 21, 39, 0.85);
+  --app-glass-border: rgba(201, 168, 76, 0.3);
+  --app-glass-subtle: rgba(26, 21, 39, 0.65);
+
+  background-color: var(--app-bg);
+  color: var(--app-text);
   color-scheme: dark;
 }
 
+/* 🍕 Opción A: La Ruta Foodie / Sobremesa & Bodegón Cálido
+   (Ajustado: menos rojo, tonos oliva, tostado, café y ámbar cálido) */
+[data-theme="foodie"] {
+  --app-bg: #151311;
+  --app-surface: #231f1c;
+  --app-surface2: #302b26;
+  --app-accent: #e59843;
+  --app-accent-light: #f5b96b;
+  --app-secondary: #7d8b58;
+  --app-text: #f9f5ed;
+  --app-muted: #a69c8f;
+  --app-glass-bg: rgba(35, 31, 28, 0.88);
+  --app-glass-border: rgba(229, 152, 67, 0.32);
+  --app-glass-subtle: rgba(35, 31, 28, 0.65);
+}
+
+/* ⚔️ Opción B: Star Wars / Galaxia Lejana (30 Vueltas al Sol)
+   (Amarillo icónico Star Wars crawl #FFE81F, azul hiperespacio #040711, sable verde/azul) */
+[data-theme="space"] {
+  --app-bg: #030509;
+  --app-surface: #0a0f1d;
+  --app-surface2: #121a30;
+  --app-accent: #ffe81f;
+  --app-accent-light: #4deeea;
+  --app-secondary: #2de26d;
+  --app-text: #f6f8fb;
+  --app-muted: #798baf;
+  --app-glass-bg: rgba(10, 15, 29, 0.9);
+  --app-glass-border: rgba(255, 232, 31, 0.35);
+  --app-glass-subtle: rgba(10, 15, 29, 0.7);
+}
+
+/* 🎈 Opción C: Wes Anderson Storybook (The Grand Budapest Hotel / Moonrise Kingdom)
+   (Pasteles vintage simétricos: Rosa pastel Mendl's #e8a5b8, Amarillo mostaza #e2ad3b, Celeste pastel #89b0ae) */
+[data-theme="wes"] {
+  --app-bg: #1c1822;
+  --app-surface: #2a2333;
+  --app-surface2: #383044;
+  --app-accent: #f4b663;
+  --app-accent-light: #fcd59c;
+  --app-secondary: #f09ea7;
+  --app-text: #fdfaf2;
+  --app-muted: #b3a5be;
+  --app-glass-bg: rgba(42, 35, 51, 0.88);
+  --app-glass-border: rgba(244, 182, 99, 0.38);
+  --app-glass-subtle: rgba(42, 35, 51, 0.68);
+}
+
 body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: var(--app-bg);
+  color: var(--app-text);
   font-family: var(--font-body);
   overflow-x: hidden;
   min-height: 100vh;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* Glassmorphism utility */
 .glass-panel {
-  background: rgba(26, 21, 39, 0.85);
+  background: var(--app-glass-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(201, 168, 76, 0.3);
+  border: 1px solid var(--app-glass-border);
 }
 
 .glass-panel-subtle {
-  background: rgba(26, 21, 39, 0.65);
+  background: var(--app-glass-subtle);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(201, 168, 76, 0.18);
+  border: 1px solid var(--app-glass-border);
 }
 
 /* Shake animation for errors */
@@ -98,4 +160,3 @@ body {
 .animate-ambientPulse {
   animation: ambientPulse 12s infinite ease-in-out;
 }
-

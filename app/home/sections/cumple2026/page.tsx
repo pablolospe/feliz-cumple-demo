@@ -7,11 +7,15 @@ import { isAuthenticated, isSectionUnlocked } from "@/lib/auth";
 import YoutubePlayer from "@/components/YoutubePlayer";
 import { YOUTUBE_VIDEOS } from "@/lib/data";
 import { ArrowLeft, Music } from "lucide-react";
+import { useDemoSettings } from "@/lib/demo-settings";
+import NextSectionCta from "@/components/NextSectionCta";
 
 export default function Cumple2026Page() {
   const router = useRouter();
+  const { themeConfig } = useDemoSettings();
   const [authorized, setAuthorized] = useState(false);
   const info = YOUTUBE_VIDEOS.cumple2026;
+  const themedCopy = themeConfig.sectionCopy.cumple2026;
 
   useEffect(() => {
     if (!isAuthenticated()) {
@@ -31,6 +35,9 @@ export default function Cumple2026Page() {
     );
   }
 
+  const pageTitle = themedCopy?.title || info.title;
+  const pageSubtitle = themedCopy?.subtitle || info.subtitle;
+
   return (
     <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 py-8 sm:py-12 flex-1 flex flex-col">
       <div className="mb-6">
@@ -46,19 +53,26 @@ export default function Cumple2026Page() {
             <Music className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-4xl font-serif text-text">{info.title}</h1>
-            <p className="text-sm text-muted">{info.subtitle}</p>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-gold bg-gold/10 px-2 py-0.5 rounded-full border border-gold/25">
+                {themedCopy?.badgeText || "Paso 1 de 4"}
+              </span>
+            </div>
+            <h1 className="text-2xl sm:text-4xl font-serif text-text mt-1">{pageTitle}</h1>
+            <p className="text-sm text-muted">{pageSubtitle}</p>
           </div>
         </div>
       </div>
 
       <div className="my-auto py-6">
-        {/* VIDEO 2026 — comentado temporalmente */}
-        <YoutubePlayer videoId={info.youtubeId} title={info.title} />
+        <YoutubePlayer videoId={info.youtubeId} title={pageTitle} />
         <p className="text-center text-sm text-muted mt-6 max-w-xl mx-auto leading-relaxed">
           {info.description}
         </p>
       </div>
+
+      {/* Siguiente parada conectada */}
+      <NextSectionCta currentSectionId="cumple2026" />
     </div>
   );
 }
