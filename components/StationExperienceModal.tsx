@@ -116,6 +116,7 @@ export default function StationExperienceModal({
     saludo1: "/videos/saludos/saludo-1.mp4",
     saludo2: "/videos/saludos/saludo-2.mp4",
     saludo3: "/videos/saludos/saludo-3.mp4",
+    saludo4: "/videos/saludos/saludo-padres.mp4",
   };
 
   const currentVideoSrc = videoSources[sectionId];

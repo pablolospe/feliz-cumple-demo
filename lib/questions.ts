@@ -75,8 +75,28 @@ export const SECTIONS: SectionConfig[] = [
     },
   },
   {
-    id: "fotos",
+    id: "saludo4",
     order: 4,
+    title: "Papás",
+    subtitle: "Video de saludo",
+    icon: "film",
+    route: "/home/sections/saludo4",
+    question: "¿Postre infaltable en cada cumpleaños?",
+    hint: "Con velitas y todos cantando...",
+    exampleAnswer: "torta",
+    validate: (ans: string) => {
+      const clean = ans.toLowerCase().trim();
+      return (
+        clean.includes("torta") ||
+        clean.includes("tarta") ||
+        clean.includes("pastel") ||
+        clean.includes("helado")
+      );
+    },
+  },
+  {
+    id: "fotos",
+    order: 5,
     title: "Galería de Fotos",
     subtitle: "Momentos compartidos",
     icon: "camera",

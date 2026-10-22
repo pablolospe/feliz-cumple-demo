@@ -228,13 +228,13 @@ export default function HomePage() {
                 <p className="text-gold-light font-medium leading-relaxed">
                   {themeConfig.secretReward}
                 </p>
-                <div className="w-full aspect-video rounded-xl overflow-hidden relative border border-gold/30 shadow-lg">
-                  <iframe
-                    className="w-full h-full"
-                    src="https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=1&rel=0"
-                    title="Secreto especial"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
+                <div className="w-full max-w-[260px] mx-auto aspect-9/16 rounded-xl overflow-hidden relative border border-gold/30 shadow-lg bg-black">
+                  <video
+                    className="w-full h-full object-cover"
+                    src="/videos/saludos/saludo-falso-pol.mp4"
+                    controls
+                    autoPlay
+                    playsInline
                   />
                 </div>
                 <button
