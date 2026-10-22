@@ -66,8 +66,8 @@ export const BASE_THEME_CONFIG: ThemeConfig = {
   secretReward: "¡Exacto! Gracias por llenar nuestros días de luz y risas. ✨",
   sectionCopy: {
     saludo1: {
-      title: "Saludo 1",
-      subtitle: "Video sorpresa",
+      title: "Marcos",
+      subtitle: "Video de saludo",
       icon: "film",
       badgeText: "Estación 1",
       question: "¿Comida infaltable para una noche con amigos?",
@@ -76,8 +76,8 @@ export const BASE_THEME_CONFIG: ThemeConfig = {
       validateKeywords: ["pizza", "empanadas", "hamburguesa"],
     },
     saludo2: {
-      title: "Saludo 2",
-      subtitle: "Mensaje especial",
+      title: "Martu",
+      subtitle: "Video de saludo",
       icon: "film",
       badgeText: "Estación 2",
       question: "¿Bebida infaltable en cada previa o juntada?",
@@ -86,8 +86,8 @@ export const BASE_THEME_CONFIG: ThemeConfig = {
       validateKeywords: ["fernet", "cerveza", "birra", "vino", "trago"],
     },
     saludo3: {
-      title: "Saludo 3",
-      subtitle: "Dedicatoria",
+      title: "Chicas de la facu",
+      subtitle: "Video de saludo",
       icon: "film",
       badgeText: "Estación 3",
       question: "¿El clásico almuerzo de domingo con amigos y familia?",

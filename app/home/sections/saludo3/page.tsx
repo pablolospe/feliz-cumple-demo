@@ -8,9 +8,9 @@ export default function Saludo3Page() {
     <GreetingVideoView
       sectionId="saludo3"
       videoSrc="/videos/saludos/saludo-3.mp4"
-      defaultTitle="Saludo 3"
+      defaultTitle="Chicas de la facu"
       defaultBadge="Estación 3"
-      defaultSubtitle="Dedicatoria"
+      defaultSubtitle="Video de saludo"
     />
   );
 }

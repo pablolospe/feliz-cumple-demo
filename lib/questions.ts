@@ -17,8 +17,8 @@ export const SECTIONS: SectionConfig[] = [
   {
     id: "saludo1",
     order: 1,
-    title: "Saludo 1",
-    subtitle: "Video sorpresa",
+    title: "Marcos",
+    subtitle: "Video de saludo",
     icon: "film",
     route: "/home/sections/saludo1",
     question: "¿Comida infaltable para una noche con amigos?",
@@ -36,8 +36,8 @@ export const SECTIONS: SectionConfig[] = [
   {
     id: "saludo2",
     order: 2,
-    title: "Saludo 2",
-    subtitle: "Mensaje especial",
+    title: "Martu",
+    subtitle: "Video de saludo",
     icon: "film",
     route: "/home/sections/saludo2",
     question: "¿Bebida infaltable en cada previa o juntada?",
@@ -57,8 +57,8 @@ export const SECTIONS: SectionConfig[] = [
   {
     id: "saludo3",
     order: 3,
-    title: "Saludo 3",
-    subtitle: "Dedicatoria",
+    title: "Chicas de la facu",
+    subtitle: "Video de saludo",
     icon: "film",
     route: "/home/sections/saludo3",
     question: "¿El clásico almuerzo de domingo con amigos y familia?",

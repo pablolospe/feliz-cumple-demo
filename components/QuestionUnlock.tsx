@@ -49,7 +49,7 @@ export default function QuestionUnlock({
         setIsSuccess(false);
         setAnswer("");
         onClose();
-      }, 900);
+      }, 600);
     }
   };
 
@@ -74,7 +74,7 @@ export default function QuestionUnlock({
         setIsSuccess(false);
         setAnswer("");
         onClose();
-      }, 1000);
+      }, 600);
     } else {
       setError(true);
       setTimeout(() => setError(false), 800);
@@ -151,7 +151,7 @@ export default function QuestionUnlock({
           {isSuccess && (
             <div className="flex items-center justify-center gap-2 text-sm text-gold-light">
               <Sparkles className="w-4 h-4 animate-spin" />
-              <span>¡Correcto! Desbloqueando sección...</span>
+              <span>¡Correcto! Entrando...</span>
             </div>
           )}
 

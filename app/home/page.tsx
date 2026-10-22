@@ -23,14 +23,30 @@ export default function HomePage() {
     if (!isAuthenticated()) {
       router.replace("/");
     } else {
-      setUnlocked(getUnlockedSections());
+      const currentUnlocked = getUnlockedSections();
+      setUnlocked(currentUnlocked);
       setLoading(false);
+
+      // Si viene con parámetro ?unlock=id, abrir modal automáticamente
+      if (typeof window !== "undefined") {
+        const params = new URLSearchParams(window.location.search);
+        const unlockId = params.get("unlock");
+        if (unlockId) {
+          const target = SECTIONS.find((s) => s.id === unlockId);
+          if (target && !currentUnlocked.includes(target.id)) {
+            setActiveModalSection(target);
+          }
+        }
+      }
     }
   }, [router]);
 
-  const handleUnlock = (sectionId: string) => {
-    const updated = unlockSection(sectionId);
+  const handleUnlock = (section: SectionConfig) => {
+    const updated = unlockSection(section.id);
     setUnlocked(updated);
+    setActiveModalSection(null);
+    // Redirige directamente al saludo/sección desbloqueada sin tener que hacer click
+    router.push(section.route);
   };
 
   const handleLogout = () => {
@@ -141,7 +157,7 @@ export default function HomePage() {
       </div>
 
       {/* Vista principal: Mapa de Estaciones */}
-      <div className="min-h-[420px]">
+      <div className="min-h-105">
         <SteppedJourneyView
           sections={SECTIONS}
           unlocked={unlocked}
@@ -173,7 +189,7 @@ export default function HomePage() {
             hint={modalCfg.hint}
             exampleAnswer={modalCfg.exampleAnswer}
             onValidate={modalCfg.validate}
-            onSuccess={() => handleUnlock(activeModalSection.id)}
+            onSuccess={() => handleUnlock(activeModalSection)}
           />
         );
       })()}
