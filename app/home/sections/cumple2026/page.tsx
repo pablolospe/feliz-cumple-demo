@@ -54,21 +54,18 @@ export default function Cumple2026Page() {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-gold bg-gold/10 px-2 py-0.5 rounded-full border border-gold/25">
-                {themedCopy?.badgeText || "Paso 1 de 4"}
+              <span className="text-[10px] font-bold uppercase tracking-wider text-gold bg-gold/10 px-2.5 py-0.5 rounded-full border border-gold/25">
+                {themedCopy?.badgeText || "Estación 2"}
               </span>
             </div>
-            <h1 className="text-2xl sm:text-4xl font-serif text-text mt-1">{pageTitle}</h1>
-            <p className="text-sm text-muted">{pageSubtitle}</p>
+            <h1 className="text-2xl sm:text-3xl font-serif text-text mt-1">{pageTitle}</h1>
+            <p className="text-xs sm:text-sm text-muted">{pageSubtitle}</p>
           </div>
         </div>
       </div>
 
-      <div className="my-auto py-6">
+      <div className="my-auto py-4">
         <YoutubePlayer videoId={info.youtubeId} title={pageTitle} />
-        <p className="text-center text-sm text-muted mt-6 max-w-xl mx-auto leading-relaxed">
-          {info.description}
-        </p>
       </div>
 
       {/* Siguiente parada conectada */}

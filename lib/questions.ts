@@ -15,14 +15,33 @@ export interface SectionConfig {
 
 export const SECTIONS: SectionConfig[] = [
   {
-    id: "cumple2026",
+    id: "saludo1",
     order: 1,
-    title: "Video Musical de los 30",
-    subtitle: "La sorpresa musical producida por tus amigos",
-    icon: "music",
-    route: "/home/sections/cumple2026",
-    question: "Infaltable en cada previa, cumpleaños o juntada con amigos: ¿qué bebida compartimos siempre?",
-    hint: "Amargo o dulce, con hielo y espuma...",
+    title: "Saludo 1",
+    subtitle: "Video sorpresa",
+    icon: "film",
+    route: "/home/sections/saludo1",
+    question: "¿Comida infaltable para una noche con amigos?",
+    hint: "Al molde o a la piedra con queso...",
+    exampleAnswer: "pizza",
+    validate: (ans: string) => {
+      const clean = ans.toLowerCase().trim();
+      return (
+        clean.includes("pizza") ||
+        clean.includes("empanadas") ||
+        clean.includes("hamburguesa")
+      );
+    },
+  },
+  {
+    id: "saludo2",
+    order: 2,
+    title: "Saludo 2",
+    subtitle: "Mensaje especial",
+    icon: "film",
+    route: "/home/sections/saludo2",
+    question: "¿Bebida infaltable en cada previa o juntada?",
+    hint: "Amargo o dulce con hielo...",
     exampleAnswer: "fernet",
     validate: (ans: string) => {
       const clean = ans.toLowerCase().trim();
@@ -36,14 +55,14 @@ export const SECTIONS: SectionConfig[] = [
     },
   },
   {
-    id: "cumple2024",
-    order: 2,
-    title: "El Recuerdo de los 28",
-    subtitle: "La versión acústica que quedó en la historia",
-    icon: "disc",
-    route: "/home/sections/cumple2024",
-    question: "El ritual sagrado de los domingos al mediodía para reunir a la familia y amigos:",
-    hint: "Carne a la parrilla, brasas y aplauso para el asador...",
+    id: "saludo3",
+    order: 3,
+    title: "Saludo 3",
+    subtitle: "Dedicatoria",
+    icon: "film",
+    route: "/home/sections/saludo3",
+    question: "¿El clásico almuerzo de domingo con amigos y familia?",
+    hint: "Brasas y aplauso para el asador...",
     exampleAnswer: "asado",
     validate: (ans: string) => {
       const clean = ans.toLowerCase().trim();
@@ -57,13 +76,13 @@ export const SECTIONS: SectionConfig[] = [
   },
   {
     id: "fotos",
-    order: 3,
-    title: "Galería de Recuerdos",
-    subtitle: "Risas, viajes y momentos compartidos.",
+    order: 4,
+    title: "Galería de Fotos",
+    subtitle: "Momentos compartidos",
     icon: "camera",
     route: "/home/sections/fotos",
-    question: "Compañero inseparable de mañanas, estudio y charlas eternas: ¿qué nunca falta sobre la mesa?",
-    hint: "Yerba, termo, bombilla y agua caliente...",
+    question: "¿Infusión infaltable en mañanas y charlas?",
+    hint: "Yerba, termo y agua caliente...",
     exampleAnswer: "mate",
     validate: (ans: string) => {
       const clean = ans.toLowerCase().trim();
@@ -75,21 +94,22 @@ export const SECTIONS: SectionConfig[] = [
     },
   },
   {
-    id: "saludos",
-    order: 4,
-    title: "Galería de Saludos",
-    subtitle: "Mensajes y cartas llenas de amor de tu gente",
-    icon: "film",
-    route: "/home/sections/saludos",
-    question: "La comida salvadora por excelencia para una noche de series o festejo improvisado:",
-    hint: "Al molde o a la piedra, con mucho queso y orégano...",
-    exampleAnswer: "pizza",
+    id: "escape-room",
+    order: 5,
+    title: "Sala de Escape",
+    subtitle: "Desafío de acertijos",
+    icon: "key",
+    route: "/home/sections/escape-room",
+    question: "¿La clave final para abrir la Sala de Escape?",
+    hint: "Brillan en el cielo nocturno...",
+    exampleAnswer: "estrellas",
     validate: (ans: string) => {
       const clean = ans.toLowerCase().trim();
       return (
-        clean.includes("pizza") ||
-        clean.includes("empanadas") ||
-        clean.includes("hamburguesa")
+        clean.includes("estrellas") ||
+        clean.includes("estrella") ||
+        clean.includes("luz") ||
+        clean.includes("amigos")
       );
     },
   },
@@ -98,11 +118,10 @@ export const SECTIONS: SectionConfig[] = [
 export const EASTER_EGG_CONFIG = {
   id: "easter-egg-secreto",
   promptQuestion: "La vida sin amigos es como un cielo sin...",
+  hint: "Brillan en la noche...",
   exampleAnswer: "estrellas",
   validate: (ans: string) => {
     const clean = ans.toLowerCase().trim();
-    return clean.includes("estrellas") || clean.includes("sol") || clean.includes("luz");
+    return clean.includes("estrellas") || clean.includes("estrella") || clean.includes("luz");
   },
-  rewardMessage: "¡Exacto! Gracias por llenar nuestros días de luz y risas. ✨",
-  youtubeId: "kJQP7kiw5Fk",
 };

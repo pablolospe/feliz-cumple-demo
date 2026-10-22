@@ -53,12 +53,12 @@ export default function FotosPage() {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-gold bg-gold/10 px-2 py-0.5 rounded-full border border-gold/25">
-                {themedCopy?.badgeText || "Paso 3 de 4"}
+              <span className="text-[10px] font-bold uppercase tracking-wider text-gold bg-gold/10 px-2.5 py-0.5 rounded-full border border-gold/25">
+                {themedCopy?.badgeText || "Estación 4"}
               </span>
             </div>
-            <h1 className="text-2xl sm:text-4xl font-serif text-text mt-1">{pageTitle}</h1>
-            <p className="text-sm text-muted">{pageSubtitle}</p>
+            <h1 className="text-2xl sm:text-3xl font-serif text-text mt-1">{pageTitle}</h1>
+            <p className="text-xs sm:text-sm text-muted">{pageSubtitle}</p>
           </div>
         </div>
       </div>

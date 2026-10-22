@@ -8,11 +8,11 @@ import QuestionUnlock from "@/components/QuestionUnlock";
 import { Sparkles, LogOut, Award } from "lucide-react";
 import confetti from "canvas-confetti";
 import { useDemoSettings } from "@/lib/demo-settings";
-import { CardsGridView, SteppedJourneyView, NarrativeTimelineView } from "@/components/NavigationViews";
+import { SteppedJourneyView } from "@/components/NavigationViews";
 
 export default function HomePage() {
   const router = useRouter();
-  const { navStyle, themeConfig } = useDemoSettings();
+  const { themeConfig } = useDemoSettings();
   const [unlocked, setUnlocked] = useState<string[]>([]);
   const [activeModalSection, setActiveModalSection] = useState<SectionConfig | null>(null);
   const [easterEggOpen, setEasterEggOpen] = useState(false);
@@ -81,10 +81,7 @@ export default function HomePage() {
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-[11px] uppercase tracking-widest text-gold font-bold flex items-center gap-1.5 bg-gold/10 px-2.5 py-1 rounded-full border border-gold/30">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>{themeConfig.badge} · {themeConfig.tagline}</span>
-            </span>
-            <span className="text-xs text-muted">
-              Modo: <strong className="text-text capitalize">{navStyle}</strong>
+              <span>Mapa de Estaciones</span>
             </span>
           </div>
           <h1 className="text-2xl sm:text-4xl font-serif text-text mt-2 flex items-center gap-2.5">
@@ -121,18 +118,18 @@ export default function HomePage() {
       </header>
 
       {/* Progress Bar & Passport */}
-      <div className="mb-8 p-5 rounded-2xl glass-panel-subtle">
+      <div className="mb-6 p-4 sm:p-5 rounded-2xl glass-panel-subtle">
         <div className="flex items-center justify-between text-xs sm:text-sm mb-2 text-muted">
           <span className="flex items-center gap-2">
-            <span>Progreso del viaje interactivo</span>
+            <span>Progreso</span>
             {unlockedCount === SECTIONS.length && (
               <span className="text-[10px] bg-gold/20 text-gold-light px-2 py-0.5 rounded-full font-bold">
-                ¡100% Desbloqueado!
+                ¡100%!
               </span>
             )}
           </span>
           <span className="font-semibold text-gold-light">
-            {unlockedCount} de {SECTIONS.length} hitos completados
+            {unlockedCount} / {SECTIONS.length}
           </span>
         </div>
         <div className="w-full bg-surface h-2.5 rounded-full overflow-hidden border border-white/5">
@@ -143,34 +140,14 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Renderizado Condicional según navStyle (3 Opciones de Navegación) */}
+      {/* Vista principal: Mapa de Estaciones */}
       <div className="min-h-[420px]">
-        {navStyle === "cards" && (
-          <CardsGridView
-            sections={SECTIONS}
-            unlocked={unlocked}
-            isEligibleToUnlock={isEligibleToUnlock}
-            onOpenModal={(sec) => setActiveModalSection(sec)}
-          />
-        )}
-
-        {navStyle === "journey" && (
-          <SteppedJourneyView
-            sections={SECTIONS}
-            unlocked={unlocked}
-            isEligibleToUnlock={isEligibleToUnlock}
-            onOpenModal={(sec) => setActiveModalSection(sec)}
-          />
-        )}
-
-        {navStyle === "timeline" && (
-          <NarrativeTimelineView
-            sections={SECTIONS}
-            unlocked={unlocked}
-            isEligibleToUnlock={isEligibleToUnlock}
-            onOpenModal={(sec) => setActiveModalSection(sec)}
-          />
-        )}
+        <SteppedJourneyView
+          sections={SECTIONS}
+          unlocked={unlocked}
+          isEligibleToUnlock={isEligibleToUnlock}
+          onOpenModal={(sec) => setActiveModalSection(sec)}
+        />
       </div>
 
       {/* Easter Egg Trigger en Footer adaptado a la temática */}

@@ -109,17 +109,17 @@ export default function QuestionUnlock({
             <p className="text-xs text-muted mt-2 italic">Pista: {hint}</p>
           )}
 
-          {/* Ayuda visible para portfolio */}
+          {/* Ayuda rápida */}
           {exampleAnswer && (
-            <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/10 border border-gold/25 text-xs text-gold-light">
+            <div className="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/10 border border-gold/25 text-xs text-gold-light">
               <HelpCircle className="w-3.5 h-3.5 text-gold" />
-              <span>Respuesta sugerida:</span>
+              <span>Sugerencia:</span>
               <button
                 type="button"
                 onClick={() => handleApplyAnswer(exampleAnswer)}
                 className="underline font-bold text-text hover:text-white cursor-pointer ml-0.5"
               >
-                &ldquo;{exampleAnswer}&rdquo; (clic para autocompletar)
+                &ldquo;{exampleAnswer}&rdquo;
               </button>
             </div>
           )}

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Lock, Unlock, ArrowRight, Sparkles, CheckCircle2, ChevronRight, Music, Disc, Camera, Film, Wine, Flame, Utensils, Heart, Radio, Satellite, Orbit, Cpu, Feather } from "lucide-react";
+import { Lock, Unlock, ArrowRight, Sparkles, CheckCircle2, ChevronRight, Music, Disc, Camera, Film, Key, Wine, Flame, Utensils, Heart, Radio, Satellite, Orbit, Cpu, Feather } from "lucide-react";
 import { SectionConfig } from "@/lib/questions";
 import { useDemoSettings } from "@/lib/demo-settings";
 
@@ -19,6 +19,7 @@ function SectionThemedIcon({ icon, className = "w-6 h-6" }: { icon: string; clas
     case "disc": return <Disc className={className} />;
     case "camera": return <Camera className={className} />;
     case "film": return <Film className={className} />;
+    case "key": return <Key className={className} />;
     case "wine": return <Wine className={className} />;
     case "flame": return <Flame className={className} />;
     case "utensils": return <Utensils className={className} />;
@@ -219,60 +220,57 @@ export function SteppedJourneyView({ sections, unlocked, isEligibleToUnlock, onO
                 {isUnlocked ? (
                   <Link
                     href={section.route}
-                    className="block p-5 sm:p-6 rounded-2xl glass-panel border-gold/30 hover:border-gold-light transition-all hover:translate-x-1.5 shadow-lg group-hover:shadow-gold/10"
+                    className="block p-4 sm:p-5 rounded-2xl glass-panel border-gold/30 hover:border-gold-light transition-all hover:translate-x-1 shadow-md group-hover:shadow-gold/10"
                   >
-                    <div className="flex items-center justify-between gap-2 mb-2">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-gold-light flex items-center gap-1.5">
-                        <SectionThemedIcon icon={icon} className="w-4 h-4" />
+                    <div className="flex items-center justify-between gap-2 mb-1">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-gold-light flex items-center gap-1.5">
+                        <SectionThemedIcon icon={icon} className="w-3.5 h-3.5" />
                         <span>{badge}</span>
                       </span>
                       <span className="text-xs text-gold flex items-center gap-1 font-semibold">
-                        <span>Explorar</span>
-                        <ChevronRight className="w-4 h-4" />
+                        <span>Ver</span>
+                        <ChevronRight className="w-3.5 h-3.5" />
                       </span>
                     </div>
-                    <h3 className="font-serif text-xl sm:text-2xl text-text group-hover:text-gold-light transition-colors">
+                    <h3 className="font-serif text-lg sm:text-xl text-text group-hover:text-gold-light transition-colors">
                       {title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-muted mt-1 leading-relaxed">{subtitle}</p>
+                    {subtitle && <p className="text-xs text-muted mt-0.5">{subtitle}</p>}
                   </Link>
                 ) : canUnlock ? (
                   <div
                     onClick={() => onOpenModal(section)}
-                    className="p-5 sm:p-6 rounded-2xl glass-panel border-gold shadow-xl cursor-pointer hover:translate-x-1.5 transition-all hover:brightness-105 bg-surface/90"
+                    className="p-4 sm:p-5 rounded-2xl glass-panel border-gold shadow-xl cursor-pointer hover:translate-x-1 transition-all hover:brightness-105 bg-surface/90"
                   >
-                    <div className="flex items-center justify-between gap-2 mb-2">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-gold flex items-center gap-1.5">
-                        <Sparkles className="w-4 h-4 animate-spin" />
-                        <span>{badge} · ¡Próxima parada!</span>
+                    <div className="flex items-center justify-between gap-2 mb-1">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-gold flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5 animate-spin" />
+                        <span>{badge}</span>
                       </span>
-                      <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-gold text-bg font-bold uppercase">
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-gold text-bg font-bold uppercase">
                         Desbloquear
                       </span>
                     </div>
-                    <h3 className="font-serif text-xl sm:text-2xl text-text">
+                    <h3 className="font-serif text-lg sm:text-xl text-text">
                       {title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-muted mt-1 mb-4 leading-relaxed">{subtitle}</p>
+                    {subtitle && <p className="text-xs text-muted mt-0.5 mb-3">{subtitle}</p>}
                     <button
                       type="button"
-                      className="px-4 py-2 rounded-xl bg-gold text-bg text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-gold-light cursor-pointer shadow-md"
+                      className="px-3 py-1.5 rounded-xl bg-gold text-bg text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 hover:bg-gold-light cursor-pointer shadow-sm"
                     >
-                      <Lock className="w-3.5 h-3.5" />
-                      <span>Responder consigna para avanzar</span>
+                      <Lock className="w-3 h-3" />
+                      <span>Responder para avanzar</span>
                     </button>
                   </div>
                 ) : (
-                  <div className="p-5 sm:p-6 rounded-2xl glass-panel-subtle border-white/5 opacity-60">
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-muted block mb-1">
-                      {badge} · Bloqueada
+                  <div className="p-4 sm:p-5 rounded-2xl glass-panel-subtle border-white/5 opacity-50">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-muted block mb-0.5">
+                      {badge}
                     </span>
-                    <h3 className="font-serif text-lg sm:text-xl text-muted">
+                    <h3 className="font-serif text-base sm:text-lg text-muted">
                       {title}
                     </h3>
-                    <p className="text-xs text-muted/70 mt-1">
-                      Completá la parada anterior en el mapa para desbloquear este hito.
-                    </p>
                   </div>
                 )}
               </div>

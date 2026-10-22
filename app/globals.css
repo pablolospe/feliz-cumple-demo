@@ -14,8 +14,10 @@
   --font-body: var(--font-inter), sans-serif;
 }
 
-:root {
-  /* Default: Golden Glam (Standard) */
+:root,
+[data-theme="dorado"],
+[data-theme="standard"] {
+  /* 1. Dorado (Golden Glam - Elegante Clásico) */
   --app-bg: #0d0a14;
   --app-surface: #1a1527;
   --app-surface2: #241d36;
@@ -33,52 +35,112 @@
   color-scheme: dark;
 }
 
-/* 🍕 Opción A: La Ruta Foodie / Sobremesa & Bodegón Cálido
-   (Ajustado: menos rojo, tonos oliva, tostado, café y ámbar cálido) */
-[data-theme="foodie"] {
-  --app-bg: #151311;
-  --app-surface: #231f1c;
-  --app-surface2: #302b26;
-  --app-accent: #e59843;
-  --app-accent-light: #f5b96b;
-  --app-secondary: #7d8b58;
-  --app-text: #f9f5ed;
-  --app-muted: #a69c8f;
-  --app-glass-bg: rgba(35, 31, 28, 0.88);
-  --app-glass-border: rgba(229, 152, 67, 0.32);
-  --app-glass-subtle: rgba(35, 31, 28, 0.65);
-}
-
-/* ⚔️ Opción B: Star Wars / Galaxia Lejana (30 Vueltas al Sol)
-   (Amarillo icónico Star Wars crawl #FFE81F, azul hiperespacio #040711, sable verde/azul) */
-[data-theme="space"] {
-  --app-bg: #030509;
-  --app-surface: #0a0f1d;
-  --app-surface2: #121a30;
-  --app-accent: #ffe81f;
-  --app-accent-light: #4deeea;
-  --app-secondary: #2de26d;
-  --app-text: #f6f8fb;
-  --app-muted: #798baf;
-  --app-glass-bg: rgba(10, 15, 29, 0.9);
-  --app-glass-border: rgba(255, 232, 31, 0.35);
-  --app-glass-subtle: rgba(10, 15, 29, 0.7);
-}
-
-/* 🎈 Opción C: Wes Anderson Storybook (The Grand Budapest Hotel / Moonrise Kingdom)
-   (Pasteles vintage simétricos: Rosa pastel Mendl's #e8a5b8, Amarillo mostaza #e2ad3b, Celeste pastel #89b0ae) */
+/* 2. Chicle (Rosa chicle vibrante) */
+[data-theme="chicle"],
 [data-theme="wes"] {
-  --app-bg: #1c1822;
-  --app-surface: #2a2333;
-  --app-surface2: #383044;
-  --app-accent: #f4b663;
-  --app-accent-light: #fcd59c;
-  --app-secondary: #f09ea7;
-  --app-text: #fdfaf2;
-  --app-muted: #b3a5be;
-  --app-glass-bg: rgba(42, 35, 51, 0.88);
-  --app-glass-border: rgba(244, 182, 99, 0.38);
-  --app-glass-subtle: rgba(42, 35, 51, 0.68);
+  --app-bg: #150914;
+  --app-surface: #241122;
+  --app-surface2: #341832;
+  --app-accent: #ff60ad;
+  --app-accent-light: #ffa4d2;
+  --app-secondary: #f472b6;
+  --app-text: #fff0f6;
+  --app-muted: #b88ba8;
+  --app-glass-bg: rgba(36, 17, 34, 0.88);
+  --app-glass-border: rgba(255, 96, 173, 0.35);
+  --app-glass-subtle: rgba(36, 17, 34, 0.65);
+}
+
+/* 3. Rock (Negro y rojo intenso / rockero) */
+[data-theme="rock"] {
+  --app-bg: #0a0808;
+  --app-surface: #181212;
+  --app-surface2: #261a1a;
+  --app-accent: #e62b2b;
+  --app-accent-light: #ff5e5e;
+  --app-secondary: #ff7744;
+  --app-text: #f8f6f6;
+  --app-muted: #a38888;
+  --app-glass-bg: rgba(24, 18, 18, 0.90);
+  --app-glass-border: rgba(230, 43, 43, 0.38);
+  --app-glass-subtle: rgba(24, 18, 18, 0.70);
+}
+
+/* 4. Cyber (Azul eléctrico tecnológico) */
+[data-theme="cyber"],
+[data-theme="space"] {
+  --app-bg: #040c18;
+  --app-surface: #0a182c;
+  --app-surface2: #0f2442;
+  --app-accent: #00d2ff;
+  --app-accent-light: #5ce1e6;
+  --app-secondary: #3b82f6;
+  --app-text: #f0f8ff;
+  --app-muted: #7899be;
+  --app-glass-bg: rgba(10, 24, 44, 0.88);
+  --app-glass-border: rgba(0, 210, 255, 0.35);
+  --app-glass-subtle: rgba(10, 24, 44, 0.65);
+}
+
+/* 5. Matrix (Verde código / digital) */
+[data-theme="matrix"] {
+  --app-bg: #040a06;
+  --app-surface: #09170c;
+  --app-surface2: #0f2414;
+  --app-accent: #00ff66;
+  --app-accent-light: #55ff88;
+  --app-secondary: #00cc88;
+  --app-text: #eafff0;
+  --app-muted: #629670;
+  --app-glass-bg: rgba(9, 23, 12, 0.88);
+  --app-glass-border: rgba(0, 255, 102, 0.35);
+  --app-glass-subtle: rgba(9, 23, 12, 0.65);
+}
+
+/* 6. Atardecer (Ámbar cálido / terracota) */
+[data-theme="atardecer"],
+[data-theme="foodie"] {
+  --app-bg: #150d0a;
+  --app-surface: #241712;
+  --app-surface2: #342119;
+  --app-accent: #f59e0b;
+  --app-accent-light: #fbbf24;
+  --app-secondary: #f97316;
+  --app-text: #fffbeb;
+  --app-muted: #b59587;
+  --app-glass-bg: rgba(36, 23, 18, 0.88);
+  --app-glass-border: rgba(245, 158, 11, 0.35);
+  --app-glass-subtle: rgba(36, 23, 18, 0.65);
+}
+
+/* 7. Neón (Violeta & fucsia cyberpunk) */
+[data-theme="neon"] {
+  --app-bg: #0f081c;
+  --app-surface: #1a0e30;
+  --app-surface2: #281446;
+  --app-accent: #c026d3;
+  --app-accent-light: #e879f9;
+  --app-secondary: #a855f7;
+  --app-text: #fbf5ff;
+  --app-muted: #9e84b8;
+  --app-glass-bg: rgba(26, 14, 48, 0.88);
+  --app-glass-border: rgba(192, 38, 211, 0.35);
+  --app-glass-subtle: rgba(26, 14, 48, 0.65);
+}
+
+/* 8. Esmeralda (Verde joya / menta nórdico) */
+[data-theme="esmeralda"] {
+  --app-bg: #061311;
+  --app-surface: #0c2320;
+  --app-surface2: #13332f;
+  --app-accent: #10b981;
+  --app-accent-light: #34d399;
+  --app-secondary: #2dd4bf;
+  --app-text: #f0fdf4;
+  --app-muted: #74a199;
+  --app-glass-bg: rgba(12, 35, 32, 0.88);
+  --app-glass-border: rgba(16, 185, 129, 0.35);
+  --app-glass-subtle: rgba(12, 35, 32, 0.65);
 }
 
 body {

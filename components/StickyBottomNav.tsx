@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { getUnlockedSections, isAuthenticated } from "@/lib/auth";
 import { SECTIONS } from "@/lib/questions";
 import { useDemoSettings } from "@/lib/demo-settings";
-import { Home, Music, Disc, Camera, Film, Lock, Wine, Flame, Utensils, Heart, Radio, Satellite, Orbit, Cpu, Feather, Sparkles } from "lucide-react";
+import { Home, Music, Disc, Camera, Film, Lock, Key, Wine, Flame, Utensils, Heart, Radio, Satellite, Orbit, Cpu, Feather, Sparkles } from "lucide-react";
 
 function NavIcon({ icon, className = "w-4 h-4" }: { icon: string; className?: string }) {
   switch (icon) {
@@ -18,6 +18,8 @@ function NavIcon({ icon, className = "w-4 h-4" }: { icon: string; className?: st
       return <Camera className={className} />;
     case "film":
       return <Film className={className} />;
+    case "key":
+      return <Key className={className} />;
     case "wine":
       return <Wine className={className} />;
     case "flame":
