@@ -99,7 +99,7 @@ export default function GreetingVideoView({
       </div>
 
       {/* Reproductor Vertical */}
-      <div className="w-full max-w-[340px] sm:max-w-[380px] mx-auto my-2">
+      <div className="w-full max-w-85 sm:max-w-95 mx-auto my-2">
         <div
           onClick={togglePlay}
           className="group relative aspect-9/16 w-full rounded-2xl overflow-hidden glass-panel border border-gold/40 shadow-2xl bg-black cursor-pointer select-none"

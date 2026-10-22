@@ -58,7 +58,7 @@ export const BASE_THEME_CONFIG: ThemeConfig = {
   name: "Dorado",
   badge: "Cumpleaños",
   tagline: "30 Años",
-  greetingHeader: "¡Felices 30 Sofi! ✨",
+  greetingHeader: "¡Felices 30 Sofi!",
   secretButtonText: "¿Un secreto más?",
   secretPrompt: "La vida sin amigos es como un cielo sin...",
   secretHint: "Brillan en la noche...",

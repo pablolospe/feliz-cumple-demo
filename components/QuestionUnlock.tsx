@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { X, Sparkles, AlertCircle } from "lucide-react";
 import confetti from "canvas-confetti";
+import { canAutoFocus } from "@/lib/device";
 
 interface QuestionUnlockProps {
   isOpen: boolean;
@@ -99,7 +100,7 @@ export default function QuestionUnlock({
                 if (error) setError(false);
               }}
               placeholder={exampleAnswer ? `Ej: ${exampleAnswer}...` : "Escribí tu respuesta acá..."}
-              autoFocus
+              autoFocus={canAutoFocus()}
               className="w-full px-4 py-3 bg-bg/90 border border-gold/30 rounded-xl text-text placeholder-muted/50 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all text-center text-base"
             />
           </div>

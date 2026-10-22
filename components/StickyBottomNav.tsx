@@ -48,6 +48,25 @@ export default function StickyBottomNav() {
   const { themeConfig } = useDemoSettings();
   const [unlocked, setUnlocked] = useState<string[]>([]);
   const [authed, setAuthed] = useState(false);
+  const [keyboardOpen, setKeyboardOpen] = useState(false);
+
+  // Si el teclado está abierto, la barra flotante tapa el formulario: se oculta
+  useEffect(() => {
+    const vv = window.visualViewport;
+    const update = () => {
+      const tag = document.activeElement?.tagName;
+      const typing = tag === "INPUT" || tag === "TEXTAREA";
+      const shrunk = vv ? window.innerHeight - vv.height > 150 : false;
+      setKeyboardOpen(typing && (shrunk || window.matchMedia("(pointer: coarse)").matches));
+    };
+    vv?.addEventListener("resize", update);
+    document.addEventListener("focusin", update);
+    document.addEventListener("focusout", () => setTimeout(update, 50));
+    return () => {
+      vv?.removeEventListener("resize", update);
+      document.removeEventListener("focusin", update);
+    };
+  }, []);
 
   useEffect(() => {
     const check = () => {
@@ -60,7 +79,7 @@ export default function StickyBottomNav() {
   }, []);
 
   // No mostrar en la pantalla de login / contraseña inicial
-  if (!authed || pathname === "/") return null;
+  if (!authed || pathname === "/" || keyboardOpen) return null;
 
   return (
     <div className="fixed bottom-3 inset-x-0 z-40 flex justify-center px-4 pointer-events-none">

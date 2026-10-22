@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { checkPassword, setAuthenticated, MASTER_PASSWORD } from "@/lib/auth";
 import confetti from "canvas-confetti";
 import { Lock, Sparkles, KeyRound, Info } from "lucide-react";
+import { canAutoFocus } from "@/lib/device";
 
 export default function PasswordGate() {
   const [password, setPassword] = useState("");
@@ -42,9 +43,9 @@ export default function PasswordGate() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[85vh] px-4 py-8">
+    <div className="flex flex-col items-center justify-center min-h-[85dvh] px-4 py-6 sm:py-8">
       <div
-        className={`w-full max-w-md p-8 rounded-2xl glass-panel shadow-2xl relative transition-all duration-300 ${
+        className={`w-full max-w-md p-5 sm:p-8 rounded-2xl glass-panel shadow-2xl relative transition-all duration-300 ${
           error ? "animate-shake border-red-500/50" : ""
         } ${isSuccess ? "border-gold glow-gold" : ""}`}
       >
@@ -91,7 +92,16 @@ export default function PasswordGate() {
                   if (error) setError(false);
                 }}
                 placeholder={MASTER_PASSWORD}
-                autoFocus
+                autoComplete="off"
+                autoCapitalize="none"
+                autoCorrect="off"
+                enterKeyHint="go"
+                onFocus={(e) => {
+                  // Con el teclado abierto, deja el campo y el botón a la vista
+                  const el = e.currentTarget;
+                  setTimeout(() => el.scrollIntoView({ block: "center", behavior: "smooth" }), 300);
+                }}
+                autoFocus={canAutoFocus()}
                 className="w-full pl-11 pr-4 py-3.5 bg-bg/80 border border-gold/30 rounded-xl text-text placeholder-muted/50 text-center tracking-widest text-lg focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all font-mono"
               />
             </div>

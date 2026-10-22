@@ -5,6 +5,7 @@ import { Sparkles, AlertCircle, ArrowLeft, Play, RotateCcw, Volume2, VolumeX, Ch
 import confetti from "canvas-confetti";
 import PhotoGallery from "@/components/PhotoGallery";
 import { SAMPLE_PHOTOS } from "@/lib/data";
+import { canAutoFocus } from "@/lib/device";
 
 interface StationExperienceModalProps {
   sectionId: string;
@@ -57,13 +58,36 @@ export default function StationExperienceModal({
 
   // Fases de la animación: "origin" (tamaño de la tarjeta) -> "question" -> "content"
   const [phase, setPhase] = useState<"origin" | "question" | "content">("origin");
-  const [viewport, setViewport] = useState({ w: 0, h: 0 });
+  const [viewport, setViewport] = useState({ w: 0, h: 0, top: 0, left: 0 });
 
+  // Usa el viewport visual: en iOS el teclado no achica la ventana, pero sí el área visible
   useEffect(() => {
-    const update = () => setViewport({ w: window.innerWidth, h: window.innerHeight });
+    const vv = window.visualViewport;
+    const update = () =>
+      setViewport({
+        w: vv?.width ?? window.innerWidth,
+        h: vv?.height ?? window.innerHeight,
+        top: vv?.offsetTop ?? 0,
+        left: vv?.offsetLeft ?? 0,
+      });
     update();
     window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+    vv?.addEventListener("resize", update);
+    vv?.addEventListener("scroll", update);
+    return () => {
+      window.removeEventListener("resize", update);
+      vv?.removeEventListener("resize", update);
+      vv?.removeEventListener("scroll", update);
+    };
+  }, []);
+
+  // Evita que el fondo se desplace mientras el modal está abierto
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
   }, []);
 
   // Al montar: un frame en el rect de la tarjeta y luego crece a su tamaño real
@@ -92,12 +116,12 @@ export default function StationExperienceModal({
   const getRect = () => {
     const { w, h } = viewport;
     const centered = (width: number, height: number) => ({
-      left: (w - width) / 2,
-      top: (h - height) / 2,
+      left: viewport.left + (w - width) / 2,
+      top: viewport.top + (h - height) / 2,
       width,
       height,
     });
-    if (phase === "question") return centered(Math.min(512, w - 24), Math.min(400, h - 24));
+    if (phase === "question") return centered(Math.min(512, w - 24), Math.min(380, h - 16));
     if (phase === "content") {
       const maxW = sectionId === "fotos" ? 1024 : 640;
       return centered(Math.min(maxW, w - 24), Math.min(h * 0.92, 820));
@@ -195,7 +219,7 @@ export default function StationExperienceModal({
         } ${isSuccessAnim ? "border-gold glow-gold" : ""}`}
       >
         <div
-          className={`flex-1 min-h-0 flex flex-col p-5 sm:p-7 transition-opacity duration-500 ${
+          className={`flex-1 min-h-0 flex flex-col p-4 sm:p-7 transition-opacity duration-500 ${
             showInner ? "opacity-100 delay-200" : "opacity-0"
           }`}
         >
@@ -215,7 +239,7 @@ export default function StationExperienceModal({
 
           {/* ── PASO 1: CONSULTA / PREGUNTA ───────────────────── */}
           {step === "question" && (
-            <div className="flex-1 flex flex-col justify-center text-center animate-fadeIn">
+            <div className="flex-1 min-h-0 overflow-y-auto flex flex-col justify-center text-center animate-fadeIn">
               <h2 className="text-xl sm:text-2xl font-serif text-text leading-relaxed">{question}</h2>
               {hint && <p className="text-xs text-muted mt-2 italic">Pista: {hint}</p>}
 
@@ -228,7 +252,7 @@ export default function StationExperienceModal({
                     if (error) setError(false);
                   }}
                   placeholder={exampleAnswer ? `Ej: ${exampleAnswer}...` : "Escribí tu respuesta acá..."}
-                  autoFocus
+                  autoFocus={canAutoFocus()}
                   className="w-full px-4 py-3 bg-bg/90 border border-gold/30 rounded-xl text-text placeholder-muted/50 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all text-center text-base"
                 />
 
@@ -267,7 +291,7 @@ export default function StationExperienceModal({
               </div>
 
               {currentVideoSrc && (
-                <div className="w-full max-w-[300px] sm:max-w-[330px] mx-auto my-1 shrink-0">
+                <div className="w-full max-w-75 sm:max-w-82.5 mx-auto my-1 shrink-0">
                   <div
                     onClick={togglePlay}
                     className="group relative aspect-9/16 w-full rounded-2xl overflow-hidden glass-panel border border-gold/40 shadow-2xl bg-black cursor-pointer select-none"

@@ -9,6 +9,7 @@ import { Sparkles, LogOut, Award } from "lucide-react";
 import confetti from "canvas-confetti";
 import { useDemoSettings } from "@/lib/demo-settings";
 import { SteppedJourneyView } from "@/components/NavigationViews";
+import { canAutoFocus } from "@/lib/device";
 
 export default function HomePage() {
   const router = useRouter();
@@ -91,16 +92,32 @@ export default function HomePage() {
     <div className="flex-1 flex flex-col max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       {/* Header Hub Tematizado */}
       <header className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-8 border-b border-gold/20 gap-4">
-        <div>
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-[11px] uppercase tracking-widest text-gold font-bold flex items-center gap-1.5 bg-gold/10 px-2.5 py-1 rounded-full border border-gold/30">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Mapa de Estaciones</span>
+        <div className="flex items-center gap-3.5 sm:gap-4">
+          <div className="relative shrink-0">
+            <div className="w-13 h-13 sm:w-16 sm:h-16 rounded-full p-0.5 bg-linear-to-tr from-gold via-gold-light to-gold shadow-lg shadow-gold/20">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/fotos/sofi-avatar.jpg"
+                alt="Sofi"
+                className="w-full h-full object-cover rounded-full border border-bg"
+              />
+            </div>
+            <span className="absolute -bottom-1 -right-1 text-sm bg-surface2 rounded-full p-0.5 border border-gold/40 shadow-xs" title="Cumpleañera">
+              👑
             </span>
           </div>
-          <h1 className="text-2xl sm:text-4xl font-serif text-text mt-2 flex items-center gap-2.5">
-            <span>{themeConfig.greetingHeader}</span>
-          </h1>
+
+          <div>
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-[11px] uppercase tracking-widest text-gold font-bold flex items-center gap-1.5 bg-gold/10 px-2.5 py-1 rounded-full border border-gold/30">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Mapa de Estaciones</span>
+              </span>
+            </div>
+            <h1 className="text-2xl sm:text-4xl font-serif text-text mt-1.5 flex items-center gap-2.5">
+              <span>{themeConfig.greetingHeader}</span>
+            </h1>
+          </div>
         </div>
 
         <div className="flex items-center gap-2">
@@ -228,7 +245,7 @@ export default function HomePage() {
                 <p className="text-gold-light font-medium leading-relaxed">
                   {themeConfig.secretReward}
                 </p>
-                <div className="w-full max-w-[260px] mx-auto aspect-9/16 rounded-xl overflow-hidden relative border border-gold/30 shadow-lg bg-black">
+                <div className="w-full max-w-65 mx-auto aspect-9/16 rounded-xl overflow-hidden relative border border-gold/30 shadow-lg bg-black">
                   <video
                     className="w-full h-full object-cover"
                     src="/videos/saludos/saludo-falso-pol.mp4"
@@ -278,7 +295,7 @@ export default function HomePage() {
                   name="ans"
                   type="text"
                   placeholder={`Ej: ${themeConfig.secretAnswer}...`}
-                  autoFocus
+                  autoFocus={canAutoFocus()}
                   className="w-full px-4 py-3 bg-bg/90 border border-gold/30 rounded-xl text-text text-center focus:outline-none focus:border-gold"
                 />
                 <div className="flex gap-2">

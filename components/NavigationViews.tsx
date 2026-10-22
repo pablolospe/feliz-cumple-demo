@@ -177,7 +177,7 @@ export function SteppedJourneyView({ sections, unlocked, isEligibleToUnlock, onO
     <div className="w-full max-w-3xl mx-auto py-4 animate-fadeIn">
       <div className="relative flex flex-col gap-8">
         {/* Línea troncal conectora de fondo */}
-        <div className="absolute left-6 sm:left-10 top-8 bottom-8 w-1 bg-surface2 border-l-2 border-dashed border-gold/30 -z-0" />
+        <div className="absolute left-6 sm:left-10 top-8 bottom-8 w-1 bg-surface2 border-l-2 border-dashed border-gold/30 z-0" />
 
         {sections.map((section, index) => {
           const isUnlocked = unlocked.includes(section.id);

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import FestiveBackground from "@/components/FestiveBackground";
@@ -26,6 +26,14 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  // En Android/Chrome el teclado achica el layout en vez de tapar el contenido
+  interactiveWidget: "resizes-content",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,7 +41,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${playfair.variable} ${inter.variable} h-full antialiased`}>
-      <body className="min-h-screen relative flex flex-col bg-bg text-text font-sans selection:bg-gold/30 selection:text-gold-light pb-20">
+      <body className="min-h-dvh relative flex flex-col bg-bg text-text font-sans selection:bg-gold/30 selection:text-gold-light pb-20">
         <DemoSettingsProvider>
           <FestiveBackground />
           <DemoSwitcher />

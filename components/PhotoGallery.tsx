@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { PhotoItem } from "@/lib/data";
 import { X, ChevronLeft, ChevronRight, Maximize2, Tag, Calendar, Filter, Sparkles, Shuffle, Search } from "lucide-react";
+import { canAutoFocus } from "@/lib/device";
 
 interface PhotoGalleryProps {
   photos: PhotoItem[];
@@ -314,7 +315,7 @@ export default function PhotoGallery({ photos }: PhotoGalleryProps) {
                 value={tagSearch}
                 onChange={(e) => setTagSearch(e.target.value)}
                 placeholder="Buscar etiqueta (ej: sofi, verano, fadu, risas...)"
-                autoFocus
+                autoFocus={canAutoFocus()}
                 className="w-full px-3.5 py-2 pl-9 rounded-xl bg-surface2 border border-white/10 text-text text-sm placeholder:text-muted/60 focus:outline-none focus:border-gold transition-colors"
               />
               <Filter className="w-4 h-4 text-muted absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
