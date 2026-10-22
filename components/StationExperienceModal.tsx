@@ -113,8 +113,8 @@ export default function StationExperienceModal({
   const showInner = phase !== "origin";
 
   const videoSources: Record<string, string> = {
-    saludo1: "/videos/saludos/saludo-1.mp4",
-    saludo2: "/videos/saludos/saludo-2.mp4",
+    saludo1: "/videos/saludos/saludo-2.mp4",
+    saludo2: "/videos/saludos/saludo-1.mp4",
     saludo3: "/videos/saludos/saludo-3.mp4",
     saludo4: "/videos/saludos/saludo-padres.mp4",
   };

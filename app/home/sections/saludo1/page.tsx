@@ -7,10 +7,10 @@ export default function Saludo1Page() {
   return (
     <GreetingVideoView
       sectionId="saludo1"
-      videoSrc="/videos/saludos/saludo-1.mp4"
-      defaultTitle="Marcos"
+      videoSrc="/videos/saludos/saludo-2.mp4"
+      defaultTitle="Martu"
       defaultBadge="Estación 1"
-      defaultSubtitle="Video de saludo"
+      defaultSubtitle=""
     />
   );
 }

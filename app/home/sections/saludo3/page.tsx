@@ -10,7 +10,7 @@ export default function Saludo3Page() {
       videoSrc="/videos/saludos/saludo-3.mp4"
       defaultTitle="Chicas de la facu"
       defaultBadge="Estación 3"
-      defaultSubtitle="Video de saludo"
+      defaultSubtitle=""
     />
   );
 }
