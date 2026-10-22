@@ -93,26 +93,6 @@ export const SECTIONS: SectionConfig[] = [
       );
     },
   },
-  {
-    id: "escape-room",
-    order: 5,
-    title: "Sala de Escape",
-    subtitle: "Desafío de acertijos",
-    icon: "key",
-    route: "/home/sections/escape-room",
-    question: "¿La clave final para abrir la Sala de Escape?",
-    hint: "Brillan en el cielo nocturno...",
-    exampleAnswer: "estrellas",
-    validate: (ans: string) => {
-      const clean = ans.toLowerCase().trim();
-      return (
-        clean.includes("estrellas") ||
-        clean.includes("estrella") ||
-        clean.includes("luz") ||
-        clean.includes("amigos")
-      );
-    },
-  },
 ];
 
 export const EASTER_EGG_CONFIG = {

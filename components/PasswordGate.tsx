@@ -69,18 +69,7 @@ export default function PasswordGate() {
           <div>
             <p className="font-semibold text-text">Demo de Portfolio</p>
             <p className="text-gold-light/90 mt-0.5">
-              Clave de acceso: <code className="bg-bg px-1.5 py-0.5 rounded text-text font-mono font-bold">{MASTER_PASSWORD}</code>
-              {" · "}
-              <button
-                type="button"
-                onClick={() => {
-                  setPassword(MASTER_PASSWORD);
-                  handleAccess(MASTER_PASSWORD);
-                }}
-                className="underline hover:text-white cursor-pointer ml-1 font-medium"
-              >
-                (Autocompletar y entrar)
-              </button>
+              Clave de acceso: <code className="bg-bg px-1.5 py-0.5 rounded text-text font-mono font-bold">{MASTER_PASSWORD}</code> (tipeala abajo para ingresar)
             </p>
           </div>
         </div>
@@ -101,7 +90,7 @@ export default function PasswordGate() {
                   setPassword(e.target.value);
                   if (error) setError(false);
                 }}
-                placeholder="sofi30"
+                placeholder={MASTER_PASSWORD}
                 autoFocus
                 className="w-full pl-11 pr-4 py-3.5 bg-bg/80 border border-gold/30 rounded-xl text-text placeholder-muted/50 text-center tracking-widest text-lg focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all font-mono"
               />

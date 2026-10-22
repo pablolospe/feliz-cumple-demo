@@ -105,16 +105,6 @@ export const BASE_THEME_CONFIG: ThemeConfig = {
       exampleAnswer: "mate",
       validateKeywords: ["mate", "cafe", "café"],
     },
-    "escape-room": {
-      title: "Sala de Escape",
-      subtitle: "Desafío de acertijos",
-      icon: "key",
-      badgeText: "Estación 5",
-      question: "¿La clave final para abrir la Sala de Escape?",
-      hint: "Brillan en el cielo nocturno...",
-      exampleAnswer: "estrellas",
-      validateKeywords: ["estrellas", "estrella", "luz", "amigos"],
-    },
     // Alias para compatibilidad
     saludos: {
       title: "Saludo 1",

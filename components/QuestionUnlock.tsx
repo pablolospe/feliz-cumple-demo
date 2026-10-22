@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { X, Sparkles, AlertCircle, HelpCircle } from "lucide-react";
+import { X, Sparkles, AlertCircle } from "lucide-react";
 import confetti from "canvas-confetti";
 
 interface QuestionUnlockProps {
@@ -30,28 +30,6 @@ export default function QuestionUnlock({
   const [isSuccess, setIsSuccess] = useState(false);
 
   if (!isOpen) return null;
-
-  const handleApplyAnswer = (val: string) => {
-    setAnswer(val);
-    if (onValidate(val)) {
-      setIsSuccess(true);
-      setError(false);
-
-      confetti({
-        particleCount: 100,
-        spread: 80,
-        origin: { y: 0.5 },
-        colors: ["#c9a84c", "#e8c97a", "#e8a0b0", "#ffffff"],
-      });
-
-      setTimeout(() => {
-        onSuccess();
-        setIsSuccess(false);
-        setAnswer("");
-        onClose();
-      }, 600);
-    }
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -107,21 +85,6 @@ export default function QuestionUnlock({
           </h2>
           {hint && (
             <p className="text-xs text-muted mt-2 italic">Pista: {hint}</p>
-          )}
-
-          {/* Ayuda rápida */}
-          {exampleAnswer && (
-            <div className="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/10 border border-gold/25 text-xs text-gold-light">
-              <HelpCircle className="w-3.5 h-3.5 text-gold" />
-              <span>Sugerencia:</span>
-              <button
-                type="button"
-                onClick={() => handleApplyAnswer(exampleAnswer)}
-                className="underline font-bold text-text hover:text-white cursor-pointer ml-0.5"
-              >
-                &ldquo;{exampleAnswer}&rdquo;
-              </button>
-            </div>
           )}
         </div>
 
