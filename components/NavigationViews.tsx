@@ -10,7 +10,7 @@ interface NavigationViewsProps {
   sections: SectionConfig[];
   unlocked: string[];
   isEligibleToUnlock: (index: number) => boolean;
-  onOpenModal: (section: SectionConfig) => void;
+  onOpenModal: (section: SectionConfig, originRect?: DOMRect) => void;
 }
 
 function SectionThemedIcon({ icon, className = "w-6 h-6" }: { icon: string; className?: string }) {
@@ -50,10 +50,10 @@ export function CardsGridView({ sections, unlocked, isEligibleToUnlock, onOpenMo
 
         if (isUnlocked) {
           return (
-            <Link
+            <div
               key={section.id}
-              href={section.route}
-              className="group block p-6 sm:p-7 rounded-2xl glass-panel relative overflow-hidden transition-all duration-300 hover:border-gold-light hover:scale-[1.02] hover:shadow-xl hover:shadow-gold/10"
+              onClick={() => onOpenModal(section)}
+              className="group block p-6 sm:p-7 rounded-2xl glass-panel relative overflow-hidden transition-all duration-300 hover:border-gold-light hover:scale-[1.02] hover:shadow-xl hover:shadow-gold/10 cursor-pointer"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-gold/10 rounded-full blur-2xl group-hover:bg-gold/20 transition-all pointer-events-none" />
 
@@ -81,7 +81,7 @@ export function CardsGridView({ sections, unlocked, isEligibleToUnlock, onOpenMo
                 <span>Ver contenido</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </div>
-            </Link>
+            </div>
           );
         }
 
@@ -218,9 +218,9 @@ export function SteppedJourneyView({ sections, unlocked, isEligibleToUnlock, onO
               {/* Tarjeta de la Estación */}
               <div className="flex-1 min-w-0">
                 {isUnlocked ? (
-                  <Link
-                    href={section.route}
-                    className="block p-4 sm:p-5 rounded-2xl glass-panel border-gold/30 hover:border-gold-light transition-all hover:translate-x-1 shadow-md group-hover:shadow-gold/10"
+                  <div
+                    onClick={(e) => onOpenModal(section, e.currentTarget.getBoundingClientRect())}
+                    className="block p-4 sm:p-5 rounded-2xl glass-panel border-gold/30 hover:border-gold-light transition-all hover:translate-x-1 shadow-md group-hover:shadow-gold/10 cursor-pointer active:scale-[0.99]"
                   >
                     <div className="flex items-center justify-between gap-2 mb-1">
                       <span className="text-[10px] font-bold uppercase tracking-wider text-gold-light flex items-center gap-1.5">
@@ -236,10 +236,10 @@ export function SteppedJourneyView({ sections, unlocked, isEligibleToUnlock, onO
                       {title}
                     </h3>
                     {subtitle && <p className="text-xs text-muted mt-0.5">{subtitle}</p>}
-                  </Link>
+                  </div>
                 ) : canUnlock ? (
                   <div
-                    onClick={() => onOpenModal(section)}
+                    onClick={(e) => onOpenModal(section, e.currentTarget.getBoundingClientRect())}
                     className="p-4 sm:p-5 rounded-2xl glass-panel border-gold shadow-xl cursor-pointer hover:translate-x-1 transition-all hover:brightness-105 bg-surface/90"
                   >
                     <div className="flex items-center justify-between gap-2 mb-1">
@@ -360,13 +360,14 @@ export function NarrativeTimelineView({ sections, unlocked, isEligibleToUnlock, 
                     </p>
 
                     {isUnlocked && (
-                      <Link
-                        href={section.route}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-gold hover:text-gold-light uppercase tracking-wider transition-colors"
+                      <button
+                        type="button"
+                        onClick={() => onOpenModal(section)}
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-gold hover:text-gold-light uppercase tracking-wider transition-colors cursor-pointer"
                       >
                         <span>Abrir capítulo</span>
                         <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
+                      </button>
                     )}
 
                     {canUnlock && (

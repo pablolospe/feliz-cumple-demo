@@ -5,7 +5,7 @@ import Link from "next/link";
 import { getUnlockedSections } from "@/lib/auth";
 import { SECTIONS } from "@/lib/questions";
 import { useDemoSettings } from "@/lib/demo-settings";
-import { ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ArrowLeft, Sparkles, CheckCircle2 } from "lucide-react";
 
 interface NextSectionCtaProps {
   currentSectionId: string;
@@ -32,8 +32,8 @@ export default function NextSectionCta({ currentSectionId }: NextSectionCtaProps
           href="/home"
           className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gold text-bg font-semibold text-xs uppercase tracking-wider hover:brightness-110 transition-all shadow-md"
         >
-          <span>Volver al Hub</span>
-          <ArrowRight className="w-3.5 h-3.5" />
+          <ArrowLeft className="w-3.5 h-3.5" />
+          <span>Volver</span>
         </Link>
       </div>
     );

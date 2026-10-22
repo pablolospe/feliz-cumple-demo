@@ -43,10 +43,10 @@ export default function Cumple2024Page() {
       <div className="mb-6">
         <Link
           href="/home"
-          className="inline-flex items-center gap-2 text-sm text-muted hover:text-gold-light transition-colors mb-6"
+          className="inline-flex items-center gap-2 text-xs font-medium text-muted hover:text-gold-light bg-surface2/60 hover:bg-surface2 px-3 py-1.5 rounded-full border border-white/10 hover:border-gold/30 transition-all mb-6 cursor-pointer"
         >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Volver al Hub</span>
+          <ArrowLeft className="w-3.5 h-3.5" />
+          <span>Volver</span>
         </Link>
         <div className="flex items-center gap-3">
           <div className="p-3 rounded-2xl bg-surface2 border border-gold/30 text-gold-light">

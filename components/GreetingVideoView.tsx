@@ -84,10 +84,10 @@ export default function GreetingVideoView({
       <div className="mb-6 flex flex-col items-center text-center">
         <Link
           href="/home"
-          className="self-start inline-flex items-center gap-1.5 text-xs text-muted hover:text-gold-light transition-colors mb-4"
+          className="self-start inline-flex items-center gap-2 text-xs font-medium text-muted hover:text-gold-light bg-surface2/60 hover:bg-surface2 px-3 py-1.5 rounded-full border border-white/10 hover:border-gold/30 transition-all mb-4 cursor-pointer"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Volver al Hub</span>
+          <span>Volver</span>
         </Link>
 
         <span className="text-[10px] font-bold uppercase tracking-wider text-gold bg-gold/10 px-2.5 py-0.5 rounded-full border border-gold/25 mb-1.5 flex items-center gap-1">

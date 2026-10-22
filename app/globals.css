@@ -222,3 +222,34 @@ body {
 .animate-ambientPulse {
   animation: ambientPulse 12s infinite ease-in-out;
 }
+
+/* Animaciones para flujo de estación -> modal pregunta -> contenido expandido */
+@keyframes modalGrow {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-modal-grow {
+  animation: modalGrow 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes expandToContent {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-expand-content {
+  animation: expandToContent 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

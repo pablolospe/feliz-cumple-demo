@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { isAuthenticated, getUnlockedSections, unlockSection, resetProgress } from "@/lib/auth";
 import { SECTIONS, SectionConfig } from "@/lib/questions";
-import QuestionUnlock from "@/components/QuestionUnlock";
+import StationExperienceModal from "@/components/StationExperienceModal";
 import { Sparkles, LogOut, Award } from "lucide-react";
 import confetti from "canvas-confetti";
 import { useDemoSettings } from "@/lib/demo-settings";
@@ -15,6 +15,7 @@ export default function HomePage() {
   const { themeConfig } = useDemoSettings();
   const [unlocked, setUnlocked] = useState<string[]>([]);
   const [activeModalSection, setActiveModalSection] = useState<SectionConfig | null>(null);
+  const [originRect, setOriginRect] = useState<DOMRect | null>(null);
   const [easterEggOpen, setEasterEggOpen] = useState(false);
   const [easterEggSuccess, setEasterEggSuccess] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -44,9 +45,6 @@ export default function HomePage() {
   const handleUnlock = (section: SectionConfig) => {
     const updated = unlockSection(section.id);
     setUnlocked(updated);
-    setActiveModalSection(null);
-    // Redirige directamente al saludo/sección desbloqueada sin tener que hacer click
-    router.push(section.route);
   };
 
   const handleLogout = () => {
@@ -162,7 +160,10 @@ export default function HomePage() {
           sections={SECTIONS}
           unlocked={unlocked}
           isEligibleToUnlock={isEligibleToUnlock}
-          onOpenModal={(sec) => setActiveModalSection(sec)}
+          onOpenModal={(sec, rect) => {
+            setOriginRect(rect ?? null);
+            setActiveModalSection(sec);
+          }}
         />
       </div>
 
@@ -177,19 +178,40 @@ export default function HomePage() {
         </button>
       </footer>
 
-      {/* Modal de Desbloqueo de Secciones con copys de la temática activa */}
+      {/* Modal de Experiencia de Estación: Pregunta -> Video / Contenido expandido con mapa visible de fondo */}
       {activeModalSection && (() => {
         const modalCfg = getModalConfig(activeModalSection);
+        const currentIndex = SECTIONS.findIndex((s) => s.id === activeModalSection.id);
+        const nextSec = currentIndex !== -1 ? SECTIONS[currentIndex + 1] : undefined;
+        const copy = themeConfig.sectionCopy[activeModalSection.id];
+        const badgeText = copy?.badgeText || `Estación ${activeModalSection.order}`;
+        const isAlreadyUnlocked = unlocked.includes(activeModalSection.id);
+
         return (
-          <QuestionUnlock
-            isOpen={!!activeModalSection}
-            onClose={() => setActiveModalSection(null)}
+          <StationExperienceModal
+            key={activeModalSection.id}
+            originRect={originRect}
+            sectionId={activeModalSection.id}
             sectionTitle={modalCfg.title}
+            badgeText={badgeText}
+            subtitle={copy?.subtitle || activeModalSection.subtitle}
             question={modalCfg.question}
             hint={modalCfg.hint}
             exampleAnswer={modalCfg.exampleAnswer}
+            isAlreadyUnlocked={isAlreadyUnlocked}
             onValidate={modalCfg.validate}
-            onSuccess={() => handleUnlock(activeModalSection)}
+            onUnlockSuccess={() => handleUnlock(activeModalSection)}
+            onClose={() => setActiveModalSection(null)}
+            hasNext={!!nextSec}
+            nextTitle={nextSec ? (themeConfig.sectionCopy[nextSec.id]?.title || nextSec.title) : undefined}
+            onGoNext={() => {
+              if (nextSec) {
+                setOriginRect(null);
+                setActiveModalSection(nextSec);
+              } else {
+                setActiveModalSection(null);
+              }
+            }}
           />
         );
       })()}
