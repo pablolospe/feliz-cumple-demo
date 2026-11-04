@@ -79,30 +79,34 @@ export default function GreetingVideoView({
   const badgeText = themedCopy?.badgeText || defaultBadge;
 
   return (
-    <div className="max-w-4xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-10 flex-1 flex flex-col">
+    <div className="max-w-2xl mx-auto w-full px-4 sm:px-6 py-3 sm:py-6 flex-1 flex flex-col justify-between min-h-[calc(100dvh-5rem)]">
       {/* Cabecera minimalista */}
-      <div className="mb-6 flex flex-col items-center text-center">
-        <Link
-          href="/home"
-          className="self-start inline-flex items-center gap-2 text-xs font-medium text-muted hover:text-gold-light bg-surface2/60 hover:bg-surface2 px-3 py-1.5 rounded-full border border-white/10 hover:border-gold/30 transition-all mb-4 cursor-pointer"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Volver</span>
-        </Link>
+      <div className="mb-2 sm:mb-4 flex flex-col items-center text-center shrink-0">
+        <div className="w-full flex items-center justify-between mb-2">
+          <Link
+            href="/home"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-muted hover:text-gold-light bg-surface2/60 hover:bg-surface2 px-3 py-1.5 rounded-full border border-white/10 hover:border-gold/30 transition-all cursor-pointer"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Volver</span>
+          </Link>
 
-        <span className="text-[10px] font-bold uppercase tracking-wider text-gold bg-gold/10 px-2.5 py-0.5 rounded-full border border-gold/25 mb-1.5 flex items-center gap-1">
-          <Film className="w-3 h-3" />
-          <span>{badgeText}</span>
-        </span>
-        <h1 className="text-2xl sm:text-3xl font-serif text-text">{pageTitle}</h1>
-        <p className="text-xs sm:text-sm text-muted mt-0.5">{pageSubtitle}</p>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-gold bg-gold/10 px-2.5 py-0.5 rounded-full border border-gold/25 flex items-center gap-1">
+            <Film className="w-3 h-3" />
+            <span>{badgeText}</span>
+          </span>
+        </div>
+
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-serif text-text leading-tight">{pageTitle}</h1>
+        {pageSubtitle && <p className="text-xs sm:text-sm text-muted mt-0.5">{pageSubtitle}</p>}
       </div>
 
-      {/* Reproductor Vertical */}
-      <div className="w-full max-w-85 sm:max-w-95 mx-auto my-2">
+      {/* Reproductor Vertical que se adapta sin forzar scroll */}
+      <div className="flex-1 min-h-0 flex items-center justify-center my-auto py-1 overflow-hidden">
         <div
           onClick={togglePlay}
-          className="group relative aspect-9/16 w-full rounded-2xl overflow-hidden glass-panel border border-gold/40 shadow-2xl bg-black cursor-pointer select-none"
+          style={{ aspectRatio: "9/16" }}
+          className="group relative h-full max-h-[50vh] sm:max-h-[58vh] aspect-9/16 max-w-full w-auto rounded-2xl overflow-hidden glass-panel border border-gold/40 shadow-2xl bg-black cursor-pointer select-none flex items-center justify-center"
         >
           <video
             ref={videoRef}
@@ -118,8 +122,8 @@ export default function GreetingVideoView({
           {/* Botón flotante central de Play cuando está pausado */}
           {!isPlaying && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/40 pointer-events-none transition-opacity">
-              <div className="w-16 h-16 rounded-full bg-gold text-bg flex items-center justify-center shadow-2xl transform group-hover:scale-110 transition-transform">
-                <Play className="w-7 h-7 fill-current ml-1" />
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gold text-bg flex items-center justify-center shadow-2xl transform group-hover:scale-110 transition-transform">
+                <Play className="w-6 h-6 sm:w-7 sm:h-7 fill-current ml-1" />
               </div>
             </div>
           )}
@@ -144,8 +148,8 @@ export default function GreetingVideoView({
         </div>
       </div>
 
-      {/* Siguiente parada conectada */}
-      <div className="mt-8">
+      {/* Siguiente parada conectada: SIEMPRE A LA VISTA */}
+      <div className="mt-2 sm:mt-3 shrink-0">
         <NextSectionCta currentSectionId={sectionId} />
       </div>
     </div>

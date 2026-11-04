@@ -54,6 +54,7 @@ export default function StationExperienceModal({
   // Video controls para secciones con video
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  const [videoFinished, setVideoFinished] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   // Fases de la animación: "origin" (tamaño de la tarjeta) -> "question" -> "content"
@@ -219,7 +220,7 @@ export default function StationExperienceModal({
         } ${isSuccessAnim ? "border-gold glow-gold" : ""}`}
       >
         <div
-          className={`flex-1 min-h-0 flex flex-col p-4 sm:p-7 transition-opacity duration-500 ${
+          className={`flex-1 min-h-0 flex flex-col p-3.5 sm:p-6 transition-opacity duration-500 ${
             showInner ? "opacity-100 delay-200" : "opacity-0"
           }`}
         >
@@ -284,17 +285,18 @@ export default function StationExperienceModal({
 
           {/* ── PASO 2: CONTENIDO EXPANDIDO (VIDEO O GALERÍA) ─────────────── */}
           {step === "content" && (
-            <div className="flex-1 min-h-0 flex flex-col overflow-y-auto pr-1 animate-fadeIn">
-              <div className="text-center mb-4 shrink-0">
-                <h2 className="text-2xl sm:text-3xl font-serif text-text">{sectionTitle}</h2>
-                {subtitle && <p className="text-xs sm:text-sm text-muted mt-0.5">{subtitle}</p>}
+            <div className="flex-1 min-h-0 flex flex-col animate-fadeIn">
+              <div className="text-center mb-1.5 sm:mb-2 shrink-0">
+                <h2 className="text-xl sm:text-2xl font-serif text-text leading-tight">{sectionTitle}</h2>
+                {subtitle && <p className="text-[11px] sm:text-xs text-muted mt-0.5">{subtitle}</p>}
               </div>
 
-              {currentVideoSrc && (
-                <div className="w-full max-w-75 sm:max-w-82.5 mx-auto my-1 shrink-0">
+              {currentVideoSrc ? (
+                <div className="flex-1 min-h-0 flex items-center justify-center my-auto py-1 overflow-hidden">
                   <div
                     onClick={togglePlay}
-                    className="group relative aspect-9/16 w-full rounded-2xl overflow-hidden glass-panel border border-gold/40 shadow-2xl bg-black cursor-pointer select-none"
+                    style={{ aspectRatio: "9/16" }}
+                    className="group relative h-full max-h-full aspect-9/16 max-w-full w-auto rounded-2xl overflow-hidden glass-panel border border-gold/40 shadow-2xl bg-black cursor-pointer select-none flex items-center justify-center"
                   >
                     <video
                       ref={videoRef}
@@ -304,14 +306,17 @@ export default function StationExperienceModal({
                       autoPlay
                       onPlay={() => setIsPlaying(true)}
                       onPause={() => setIsPlaying(false)}
-                      onEnded={() => setIsPlaying(false)}
+                      onEnded={() => {
+                        setIsPlaying(false);
+                        setVideoFinished(true);
+                      }}
                       className="w-full h-full object-cover"
                     />
 
                     {!isPlaying && (
                       <div className="absolute inset-0 flex items-center justify-center bg-black/40 pointer-events-none transition-opacity">
-                        <div className="w-16 h-16 rounded-full bg-gold text-bg flex items-center justify-center shadow-2xl transform group-hover:scale-110 transition-transform">
-                          <Play className="w-7 h-7 fill-current ml-1" />
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gold text-bg flex items-center justify-center shadow-2xl transform group-hover:scale-110 transition-transform">
+                          <Play className="w-6 h-6 sm:w-7 sm:h-7 fill-current ml-1" />
                         </div>
                       </div>
                     )}
@@ -334,27 +339,28 @@ export default function StationExperienceModal({
                     </div>
                   </div>
                 </div>
-              )}
-
-              {sectionId === "fotos" && (
-                <div className="w-full my-2">
-                  <PhotoGallery photos={SAMPLE_PHOTOS} />
+              ) : (
+                <div className="flex-1 min-h-0 overflow-y-auto pr-1 my-1">
+                  {sectionId === "fotos" && <PhotoGallery photos={SAMPLE_PHOTOS} />}
                 </div>
               )}
 
-              <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-end gap-3 shrink-0">
+              {/* Botón SIGUIENTE / Cerrar: SIEMPRE A LA VISTA sin tener que scrollear */}
+              <div className="pt-2.5 sm:pt-3 mt-1.5 sm:mt-2 border-t border-white/10 flex items-center justify-end gap-3 shrink-0">
                 {hasNext && onGoNext ? (
                   <button
                     onClick={onGoNext}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gold text-bg font-semibold text-xs uppercase tracking-wider hover:brightness-110 transition-all cursor-pointer shadow-md"
+                    className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:py-3 rounded-xl bg-linear-to-r from-gold to-gold-light text-bg font-bold text-xs sm:text-sm uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all cursor-pointer shadow-lg shadow-gold/25 ${
+                      videoFinished ? "animate-pulse ring-2 ring-gold-light ring-offset-2 ring-offset-bg" : ""
+                    }`}
                   >
                     <span>Siguiente: {nextTitle || "Avanzar"}</span>
-                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    <CheckCircle2 className="w-4 h-4 shrink-0" />
                   </button>
                 ) : (
                   <button
                     onClick={handleClose}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gold text-bg font-semibold text-xs uppercase tracking-wider hover:brightness-110 transition-all cursor-pointer shadow-md"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:py-3 rounded-xl bg-linear-to-r from-gold to-gold-light text-bg font-bold text-xs sm:text-sm uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all cursor-pointer shadow-lg shadow-gold/25"
                   >
                     <span>Cerrar</span>
                   </button>

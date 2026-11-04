@@ -9,9 +9,10 @@ import { ArrowRight, ArrowLeft, Sparkles, CheckCircle2 } from "lucide-react";
 
 interface NextSectionCtaProps {
   currentSectionId: string;
+  className?: string;
 }
 
-export default function NextSectionCta({ currentSectionId }: NextSectionCtaProps) {
+export default function NextSectionCta({ currentSectionId, className = "" }: NextSectionCtaProps) {
   const { themeConfig } = useDemoSettings();
   const unlocked = getUnlockedSections();
 
@@ -44,18 +45,22 @@ export default function NextSectionCta({ currentSectionId }: NextSectionCtaProps
   const nextTitle = nextCopy?.title || nextSection.title;
 
   return (
-    <div className="mt-8 p-4 sm:p-5 rounded-2xl glass-panel-subtle border-gold/30 flex items-center justify-between gap-4 max-w-xl mx-auto">
+    <div
+      className={`p-3.5 sm:p-4 rounded-2xl glass-panel-subtle border border-gold/30 flex items-center justify-between gap-4 max-w-xl mx-auto shadow-md ${
+        className || "mt-4 sm:mt-6"
+      }`}
+    >
       <div>
         <span className="text-[10px] font-bold uppercase tracking-widest text-gold flex items-center gap-1 mb-0.5">
           {isNextUnlocked ? <CheckCircle2 className="w-3 h-3" /> : <Sparkles className="w-3 h-3" />}
           <span>Siguiente · 0{nextSection.order}</span>
         </span>
-        <h4 className="font-serif text-base sm:text-lg text-text">{nextTitle}</h4>
+        <h4 className="font-serif text-sm sm:text-base text-text">{nextTitle}</h4>
       </div>
 
       <Link
         href={isNextUnlocked ? nextSection.route : "/home"}
-        className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gold text-bg font-semibold text-xs uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all shadow-sm cursor-pointer"
+        className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-linear-to-r from-gold to-gold-light text-bg font-bold text-xs uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all shadow-md shadow-gold/20 cursor-pointer"
       >
         <span>{isNextUnlocked ? "Ver" : "Desbloquear"}</span>
         <ArrowRight className="w-3.5 h-3.5" />
